@@ -1,2 +1,4 @@
 node_modules
 .env
+seeds
+migrations/003.do.insert_shirtspec_data.sql
