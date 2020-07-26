@@ -134,6 +134,8 @@ customersRouter
             .catch(next)
     })
 
+    // TODO: DELETE CUSTOMER
+
 async function checkCustomerExists(req, res, next) {
     try {
         const customer = await CustomersService.getById(

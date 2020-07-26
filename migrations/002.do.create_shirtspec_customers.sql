@@ -15,6 +15,8 @@ CREATE TABLE shirtspec_customers (
     collar DECIMAL(4,2) NOT NULL
 );
 
+DROP TYPE IF EXISTS shoulder_line;
+
 CREATE TYPE shoulder_line AS ENUM (
     'regular',
     'square',
