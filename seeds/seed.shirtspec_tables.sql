@@ -23,5 +23,4 @@ VALUES
     (4, 'Anotha One', 46, 40, 19, -3, 35.5, 35.5, 11, 10.5, 34, 18, 'square'),
     (4, 'Steven Clone', 36, 30, 17, -6, 33, 33, 9, 9, 28, 15, 'square');
 
-
 COMMIT;
