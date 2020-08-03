@@ -1,5 +1,5 @@
-const bcrypt = require('bcryptjs')
-const jwt = require('jsonwebtoken')
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 function makeStoresArray() {
     return [
@@ -21,7 +21,7 @@ function makeStoresArray() {
             password: 'password',
             date_created: new Date('2021-01-22T16:28:32.615Z')
         },
-    ]
+    ];
 }
 
 function makeCustomersArray(stores) {
@@ -77,12 +77,12 @@ function makeCustomersArray(stores) {
             collar: '17.00',
             shoulder_line: 'square'
         },
-    ]
+    ];
 }
 
 function makeExpectedCustomersForStore(customers, store) {
     return customers
-        .filter(customer => customer.store_id === store.id) 
+        .filter(customer => customer.store_id === store.id); 
 }
 
 function makeMaliciousCustomer(store) {
@@ -102,21 +102,21 @@ function makeMaliciousCustomer(store) {
         tail: 32,
         collar: 16,
         shoulder_line: 'regular'
-    }
+    };
     const expectedCustomer = {
         ...makeExpectedCustomersForStore([maliciousCustomer], store),
         title: 'Naughty naughty very naughty &lt;script&gt;alert(\"xss\");&lt;/script&gt;',
-        }
+    };
     return {
         maliciousCustomer,
         expectedCustomer
-    }
+    };
 }
 
 function makeShirtspecFixtures() {
-    const testStores = makeStoresArray()
-    const testCustomers = makeCustomersArray(testStores)
-    return { testStores, testCustomers}
+    const testStores = makeStoresArray();
+    const testCustomers = makeCustomersArray(testStores);
+    return { testStores, testCustomers};
 }
 
 function cleanTables(db) {
@@ -135,14 +135,14 @@ function cleanTables(db) {
                 trx.raw(`SELECT setval('shirtspec_customers_id_seq', 0)`),
                 ])
             )
-        )
+        );
 }
 
 function seedUsers(db, users) {
     const preppedUsers = users.map(user => ({
         ...user,
         password: bcrypt.hashSync(user.password, 1)
-    }))
+    }));
 
     return db.into('shirtspec_stores').insert(preppedUsers)
         .then(() =>
@@ -151,7 +151,7 @@ function seedUsers(db, users) {
                 `SELECT setval('shirtspec_stores_id_seq', ?)`,
                 [users[users.length - 1].id],
             )
-        )
+        );
 }
 
 function seedCustomersTables(db, users, customers) {
@@ -163,8 +163,8 @@ function seedCustomersTables(db, users, customers) {
         await trx.raw(
             `SELECT setval('shirtspec_customers_id_seq', ?)`,
             [customers[customers.length - 1].id],
-        )
-    })
+        );
+    });
 }
 
 function seedMaliciousCustomer(db, store, customer) {
@@ -173,7 +173,7 @@ function seedMaliciousCustomer(db, store, customer) {
             db
                 .into('shirtspec_customers')
                 .insert([customer])
-        )
+    );
 }
 
 
@@ -181,8 +181,9 @@ function makeAuthHeader(user, secret = process.env.JWT_SECRET) {
     const token = jwt.sign({ user_id: user.id }, secret, {
         subject: user.user_name,
         algorithm: 'HS256',
-    })
-    return `Bearer ${token}`
+    });
+
+    return `Bearer ${token}`;
 }
 
 module.exports = {
@@ -197,4 +198,4 @@ module.exports = {
     seedCustomersTables,
     seedMaliciousCustomer,
     makeAuthHeader
-}
+};

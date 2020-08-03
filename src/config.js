@@ -6,4 +6,4 @@ module.exports = {
     JWT_SECRET: process.env.JWT_SECRET || 'test-jwt-secret',
     JWT_EXPIRY: process.env.JWT_EXPIRY || '3h',
     CLIENT_ORIGIN: 'https://shirtspec-app.vercel.app'
-}
+};

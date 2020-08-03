@@ -1,11 +1,11 @@
-const xss = require('xss')
+const xss = require('xss');
 
 const CustomersService = {
     getAllCustomersForStore(db, store_id) {
         return db
             .from('shirtspec_customers')
             .select('*')
-            .where({ store_id })
+            .where({ store_id });
     },
     getCustomerMeasurements(db, id) {
         return db
@@ -26,13 +26,13 @@ const CustomersService = {
                 'shoulder_line'
             )
             .where({ id })
-            .first()
+            .first();
     },
     getById(db, id) {
         return db
             .from('shirtspec_customers')
             .where({ id })
-            .first()
+            .first();
     },
     insertCustomer(db, newCustomer) {
         return db
@@ -41,7 +41,7 @@ const CustomersService = {
             .returning('*')
             .then(([customer]) => customer)
             .then(customer => 
-                CustomersService.getById(db, customer.id))
+                CustomersService.getById(db, customer.id));
     },
     serializeNewCustomer(customer) {
         return {
@@ -60,7 +60,7 @@ const CustomersService = {
             collar: customer.collar,
             shoulder_line: customer.shoulder_line,
             date_modified: new Date(customer.date_modified) || null
-        }
+        };
     },
     updateCustomerMeasurements(db, id, UpdatedMeasurementFields) {
         return db
@@ -70,7 +70,7 @@ const CustomersService = {
             .returning('*')
             .then(([customer]) => customer)
             .then(customer => 
-                CustomersService.getById(db, customer.id))
+                CustomersService.getById(db, customer.id));
     },
 
 }

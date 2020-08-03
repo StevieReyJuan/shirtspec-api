@@ -1,25 +1,25 @@
-const path = require('path')
-const express = require('express')
-const StoresService = require('./stores-service')
+const path = require('path');
+const express = require('express');
+const StoresService = require('./stores-service');
 // const { requireAuth } = require('../middleware/jwt-auth')
 
-const storesRouter = express.Router()
-const jsonBodyParser = express.json()
+const storesRouter = express.Router();
+const jsonBodyParser = express.json();
 
 storesRouter
     .post('/', jsonBodyParser, (req, res, next) => {
-        const { user_name, password } = req.body
+        const { user_name, password } = req.body;
 
         for (const field of ['user_name', 'password'])
             if(!req.body[field])
                 return res.status(400).json({
                     error: `Missing '${field}' in request body`
-                })
+                });
         
-        const passwordError = StoresService.validatePassword(password)
+        const passwordError = StoresService.validatePassword(password);
 
         if (passwordError) 
-            return res.status(400).json({ error: passwordError })
+            return res.status(400).json({ error: passwordError });
 
         StoresService.hasUserWithUserName(
             req.app.get('db'),
@@ -27,7 +27,7 @@ storesRouter
         )
         .then(hasUserWithUserName => {
             if (hasUserWithUserName)
-                return res.status(400).json({ error: `Username already exists` })
+                return res.status(400).json({ error: `Username already exists` });
 
             return StoresService.hashPassword(password)
                 .then(hashedPassword => {
@@ -35,7 +35,7 @@ storesRouter
                         user_name,
                         password: hashedPassword,
                         date_created: 'now()'
-                    }
+                    };
 
                     return StoresService.insertStore(
                         req.app.get('db'),
@@ -46,11 +46,11 @@ storesRouter
                                 .status(201)
                                 .location(path.posix.join(req.originalUrl, `/${store.id}`))
                                 .json(StoresService.serializeStore(store))
-                        })
-                })
+                        });
+                });
         })
-        .catch(next)
-    })
+        .catch(next);
+    });
 
 // async function checkStoreExists(req, res, next) {
 //     try {
@@ -69,4 +69,5 @@ storesRouter
 //         next(error)
 //     }
 // }
+
 module.exports = storesRouter;
