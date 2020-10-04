@@ -1,11 +1,11 @@
-<!-- # Shirtspec API-->
-# Shirtspec API
+<!-- # ShirtSpec API-->
+# ShirtSpec API
 
-Shirtspec is a measurement companion app for Individualized Shirts retail partners. Designed specifically with new trainees in mind, Shirtspec guides fitters through the custom shirt fitting process ensuring that they accurately record key values within the scope of the nation's most comprehensive custom shirt program.
+ShirtSpec is a measurement companion app for Individualized Shirts retail partners. Designed specifically with new trainees in mind, ShirtSpec guides fitters through the custom shirt fitting process ensuring that they accurately record key values within the scope of the nation's most comprehensive custom shirt program.
 
 ## Motivation
 
-I have personally been an IS partner for nearly decade now, and though the fitting program has advanced and become more detailed/thorough, the online ordering portal has significantly lagged behind. This project truly is the earliest, minimal iteration in what I hope can become a worthy successor to the current online order form. There's a long way to go from here--measurement validations are the most pressing need at the moment, but to replace the ol' fax machine we haven't even scratched the surface.
+I have personally been an IS partner for nearly a decade now, and though the fitting program has advanced and become more detailed/thorough, the online ordering portal has significantly lagged behind. This project truly is the earliest, minimal iteration in what I hope can become a worthy successor to the current online order form. There's a long way to go from here--measurement validations are the most pressing need at the moment, but to replace the ol' fax machine we haven't even scratched the surface.
 
 ## Build Status
 
